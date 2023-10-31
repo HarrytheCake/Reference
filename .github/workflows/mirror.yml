@@ -1,0 +1,22 @@
+name: mirror
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Git
+        run: |
+          git config --global user.name "${{ secrets.USER_NAME }}"
+          git config --global user.email "${{ secrets.USER_EMAIL }}"
+          git config --global push.default simple
+          git remote add gitea https://${{ secrets.USER_NAME }}:${{ secrets.TOKEN }}@gitea.com/HarrytheCake/reference
+          git fetch
+          git push -f gitea main
