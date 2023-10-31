@@ -20,3 +20,4 @@ jobs:
           git remote add gitea https://${{ secrets.USER_NAME }}:${{ secrets.TOKEN }}@gitea.com/HarrytheCake/reference
           git fetch
           git push -f gitea main
+
